@@ -5,6 +5,8 @@
 #include "Goat.h"
 using namespace std;
 
+// Import
+
 const int SZ_NAMES = 200, SZ_COLORS = 25;
 
 int select_goat(list<Goat> trip);
