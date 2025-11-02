@@ -81,9 +81,9 @@ int main() {
                 break; 
             case 8:  remove_color(trip);       
                 break; 
-            /*case 9:  reverse_trip(trip);       
+            case 9:  reverse_trip(trip);       
                 break;
-            case 10: names_transform(trip);    
+            /*case 10: names_transform(trip);    
                 break; 
             case 11: dedupe_names(trip);       
                 break;*/
@@ -214,5 +214,11 @@ void remove_color(list<Goat>& trip){
     trip.erase(it, trip.end());
     cout << "Removed " << (before - trip.size())
          << " goat(s). New size: " << trip.size() << "\n";
+}
+
+void reverse_trip(list<Goat>& trip){
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    reverse(trip.begin(), trip.end());
+    cout << "Trip order reversed.\n";
 }
 
