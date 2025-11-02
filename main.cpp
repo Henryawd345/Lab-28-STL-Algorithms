@@ -79,9 +79,9 @@ int main() {
                 break; 
             case 7:  birthday_all(trip);       
                 break; 
-            /*case 8:  remove_color(trip);       
+            case 8:  remove_color(trip);       
                 break; 
-            case 9:  reverse_trip(trip);       
+            /*case 9:  reverse_trip(trip);       
                 break;
             case 10: names_transform(trip);    
                 break; 
@@ -202,5 +202,17 @@ void birthday_all(list<Goat>& trip){
     for_each(trip.begin(), trip.end(),
         [](Goat& g){ g.set_age(g.get_age() + 1); });
     cout << "Every goat just had a birthday! (+1 age)\n";
+}
+
+void remove_color(list<Goat>& trip){
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    string col;
+    cout << "Remove all goats of COLOR: "; 
+    cin >> col;
+    size_t before = trip.size();
+    auto it = remove_if(trip.begin(), trip.end(),[&col](const Goat& g){ return g.get_color() == col; });
+    trip.erase(it, trip.end());
+    cout << "Removed " << (before - trip.size())
+         << " goat(s). New size: " << trip.size() << "\n";
 }
 
