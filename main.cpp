@@ -16,14 +16,14 @@ int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
-void avg_age(const std::list<Goat>& trip);
-void any_old_enough(const std::list<Goat>& trip);
-void find_by_name(const std::list<Goat>& trip);
-void birthday_all(std::list<Goat>& trip);
-void remove_color(std::list<Goat>& trip);
-void reverse_trip(std::list<Goat>& trip);
-void names_transform(const std::list<Goat>& trip);
-void dedupe_names(std::list<Goat>& trip);
+void avg_age(list<Goat>& trip);
+void any_old_enough(list<Goat>& trip);
+void find_by_name(list<Goat>& trip);
+void birthday_all(list<Goat>& trip);
+void remove_color(list<Goat>& trip);
+void reverse_trip(list<Goat>& trip);
+void names_transform(list<Goat>& trip);
+void dedupe_names(list<Goat>& trip);
 int main_menu();
 
 int main() {
@@ -163,17 +163,37 @@ int select_goat(list<Goat> trp) {
     return input;
 }
 
-void avg_age(const list<Goat>& trip) {
+void avg_age(list<Goat>& trip) {
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
-    int total = accumulate(trip.begin(), trip.end(), 0,[](int acc, const Goat& g){ return acc + g.get_age(); });
+    int total = accumulate(trip.begin(), trip.end(), 0,[](int acc, const Goat& g){ 
+        return acc + g.get_age(); });
     cout << fixed << setprecision(2)
          << "Average age: " << (double)total / trip.size() << "\n";
 }
 
-void any_old_enough(const list<Goat>& trip) {
+void any_old_enough(list<Goat>& trip) {
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
-    int n; cout << "Enter N (years): "; cin >> n;
+    int n; 
+    cout << "Enter N (years): "; 
+    cin >> n;
     bool ok = any_of(trip.begin(), trip.end(),
         [n](const Goat& g){ return g.get_age() >= n; });
     cout << (ok ? "Yes" : "No") << ", at least one goat is >= " << n << ".\n";
 }
+
+void find_by_name(list<Goat>& trip){
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    string want; 
+    cout << "Name to find: "; cin >> want;
+    auto it = find_if(trip.begin(), trip.end(),
+        [&want](const Goat& g){ return g.get_name() == want; });
+    if (it == trip.end()) {
+        cout << "No goat named '" << want << "'.\n";
+    }
+    else{
+        cout << "Found: " << it->get_name()
+        << "(age " << it->get_age()
+        << ", color: " << it->get_color()<< ")\n";
+    }
+}
+
