@@ -75,11 +75,11 @@ int main() {
                 break; 
             case 5:  any_old_enough(trip);     
                 break;
-            /*case 6:  find_by_name(trip);       
+            case 6:  find_by_name(trip);       
                 break; 
             case 7:  birthday_all(trip);       
                 break; 
-            case 8:  remove_color(trip);       
+            /*case 8:  remove_color(trip);       
                 break; 
             case 9:  reverse_trip(trip);       
                 break;
@@ -195,5 +195,12 @@ void find_by_name(list<Goat>& trip){
         << "(age " << it->get_age()
         << ", color: " << it->get_color()<< ")\n";
     }
+}
+
+void birthday_all(list<Goat>& trip){
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    for_each(trip.begin(), trip.end(),
+        [](Goat& g){ g.set_age(g.get_age() + 1); });
+    cout << "Every goat just had a birthday! (+1 age)\n";
 }
 
