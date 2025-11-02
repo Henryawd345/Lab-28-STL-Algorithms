@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <algorithm>
+#include <numeric>
+#include <ctime>  
 #include <list>
 #include "Goat.h"
 using namespace std;
@@ -13,6 +16,14 @@ int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
+void avg_age(const std::list<Goat>& trip);
+void any_old_enough(const std::list<Goat>& trip);
+void find_by_name(const std::list<Goat>& trip);
+void birthday_all(std::list<Goat>& trip);
+void remove_color(std::list<Goat>& trip);
+void reverse_trip(std::list<Goat>& trip);
+void names_transform(const std::list<Goat>& trip);
+void dedupe_names(std::list<Goat>& trip);
 int main_menu();
 
 int main() {
@@ -76,11 +87,18 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
+    cout << "[4] Average age (accumulate)\n";
+    cout << "[5] Any goat >= N years? (any_of)\n";
+    cout << "[6] Find first by name (find_if)\n";
+    cout << "[7] Give everyone a birthday +1 (for_each)\n";
+    cout << "[8] Remove all of a color (remove_if + erase)\n";
+    cout << "[9] Reverse order (reverse)\n";
+    cout << "[10] Copy names (transform)\n";
+    cout << "[11] De-duplicate by name (unique)\n";
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
-    int choice;
-    cin >> choice;
-    while (choice < 1 || choice > 4) {
+    int choice; cin >> choice;
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
