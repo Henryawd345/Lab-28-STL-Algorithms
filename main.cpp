@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <numeric>
+#include <vector>
 #include <ctime>  
 #include <list>
 #include "Goat.h"
@@ -83,9 +84,9 @@ int main() {
                 break; 
             case 9:  reverse_trip(trip);       
                 break;
-            /*case 10: names_transform(trip);    
+            case 10: names_transform(trip);    
                 break; 
-            case 11: dedupe_names(trip);       
+            /*case 11: dedupe_names(trip);       
                 break;*/
             default:
                 cout << "Invalid selection.\n";
@@ -222,3 +223,12 @@ void reverse_trip(list<Goat>& trip){
     cout << "Trip order reversed.\n";
 }
 
+void names_transform(list<Goat>& trip) {
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    vector<string> names(trip.size());
+    transform(trip.begin(), trip.end(), names.begin(),[](const Goat& g){ return g.get_name(); });
+    cout << "Names copied (transform): \n";
+    for (size_t i = 0; i < names.size(); i++)
+        cout << "\t[" << (i+1) << "] " << names[i] << "\n";
+    
+}
