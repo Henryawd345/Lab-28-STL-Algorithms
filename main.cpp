@@ -52,12 +52,12 @@ int main() {
         name = names[rand() % SZ_NAMES];
         color = colors[rand() % SZ_COLORS];
         Goat tmp(name, age, color);
-        trip.push_back(tmp);
+        trip.push_back(Goat(name, age, color));
     }
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -71,6 +71,22 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
+            case 4:  avg_age(trip);            
+                break; 
+            /*case 5:  any_old_enough(trip);     
+                break;
+            case 6:  find_by_name(trip);       
+                break; 
+            case 7:  birthday_all(trip);       
+                break; 
+            case 8:  remove_color(trip);       
+                break; 
+            case 9:  reverse_trip(trip);       
+                break;
+            case 10: names_transform(trip);    
+                break; 
+            case 11: dedupe_names(trip);       
+                break;*/
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -145,4 +161,12 @@ int select_goat(list<Goat> trp) {
         cin >> input;
     }
     return input;
+}
+
+void avg_age(const list<Goat>& trip) {
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    int total = accumulate(trip.begin(), trip.end(), 0,
+        [](int acc, const Goat& g){ return acc + g.get_age(); });
+    cout << fixed << setprecision(2)
+         << "Average age: " << (double)total / trip.size() << "\n";
 }
