@@ -73,9 +73,9 @@ int main() {
                 break;
             case 4:  avg_age(trip);            
                 break; 
-            /*case 5:  any_old_enough(trip);     
+            case 5:  any_old_enough(trip);     
                 break;
-            case 6:  find_by_name(trip);       
+            /*case 6:  find_by_name(trip);       
                 break; 
             case 7:  birthday_all(trip);       
                 break; 
@@ -165,8 +165,15 @@ int select_goat(list<Goat> trp) {
 
 void avg_age(const list<Goat>& trip) {
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
-    int total = accumulate(trip.begin(), trip.end(), 0,
-        [](int acc, const Goat& g){ return acc + g.get_age(); });
+    int total = accumulate(trip.begin(), trip.end(), 0,[](int acc, const Goat& g){ return acc + g.get_age(); });
     cout << fixed << setprecision(2)
          << "Average age: " << (double)total / trip.size() << "\n";
+}
+
+void any_old_enough(const list<Goat>& trip) {
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    int n; cout << "Enter N (years): "; cin >> n;
+    bool ok = any_of(trip.begin(), trip.end(),
+        [n](const Goat& g){ return g.get_age() >= n; });
+    cout << (ok ? "Yes" : "No") << ", at least one goat is >= " << n << ".\n";
 }
