@@ -100,25 +100,24 @@ int main() {
 }
 
 int main_menu() {
-    cout << "*** GOAT MANAGER 3001 ***\n";
-    cout << "[1] Add a goat\n";
-    cout << "[2] Delete a goat\n";
-    cout << "[3] List goats\n";
-    cout << "[4] Average age (accumulate)\n";
-    cout << "[5] Any goat >= N years? (any_of)\n";
-    cout << "[6] Find first by name (find_if)\n";
-    cout << "[7] Give everyone a birthday +1 (for_each)\n";
-    cout << "[8] Remove all of a color (remove_if + erase)\n";
-    cout << "[9] Reverse order (reverse)\n";
+     cout << "\n\n*** GOAT MANAGER 3001 ***\n";
+    cout << "[1]  Add a goat\n";
+    cout << "[2]  Delete a goat\n";
+    cout << "[3]  List goats\n";
+    cout << "----- STL Algorithms -----\n";
+    cout << "[4]  Average age (accumulate)\n";
+    cout << "[5]  Any goat >= N years? (any_of)\n";
+    cout << "[6]  Find first by name (find_if)\n";
+    cout << "[7]  Birthday for all (+1) (for_each)\n";
+    cout << "[8]  Remove color (remove_if + erase)\n";
+    cout << "[9]  Reverse order (reverse)\n";
     cout << "[10] Copy names (transform)\n";
-    cout << "[11] De-duplicate by name (unique)\n";
+    cout << "[11] De-duplicate names (unique)\n";
     cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice; cin >> choice;
-    while (choice < 1 || choice > 12) {
-        cout << "Invalid, again --> ";
-        cin >> choice;
-    }
+    while (choice < 1 || choice > 12) { cout << "Invalid, again --> "; cin >> choice; }
+    cout << "\n"; // add a blank line after input
     return choice;
 }
 
