@@ -86,8 +86,8 @@ int main() {
                 break;
             case 10: names_transform(trip);    
                 break; 
-            /*case 11: dedupe_names(trip);       
-                break;*/
+            case 11: dedupe_names(trip);       
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -230,5 +230,16 @@ void names_transform(list<Goat>& trip) {
     cout << "Names copied (transform): \n";
     for (size_t i = 0; i < names.size(); i++)
         cout << "\t[" << (i+1) << "] " << names[i] << "\n";
-    
 }
+
+void dedupe_names(list<Goat>& trip){
+    if (trip.empty()) { cout << "Trip is empty.\n"; return; }
+    trip.sort();
+    auto newEnd = unique(trip.begin(), trip.end(),
+        [](const Goat& a, const Goat& b){ return a.get_name() == b.get_name(); });
+    size_t before = trip.size();
+    trip.erase(newEnd, trip.end());
+    cout << "Removed duplicates by NAME: " << (before - trip.size())
+         << " goat(s) removed. New size: " << trip.size() << "\n";
+}
+
