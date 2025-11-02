@@ -9,7 +9,6 @@
 #include "Goat.h"
 using namespace std;
 
-// Import
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
 
@@ -17,6 +16,7 @@ int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
+// STL demonstration
 void avg_age(list<Goat>& trip);
 void any_old_enough(list<Goat>& trip);
 void find_by_name(list<Goat>& trip);
@@ -72,21 +72,21 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
-            case 4:  avg_age(trip);            
+            case 4:  avg_age(trip);         // accumulate    
                 break; 
-            case 5:  any_old_enough(trip);     
+            case 5:  any_old_enough(trip);     // any_of
                 break;
-            case 6:  find_by_name(trip);       
+            case 6:  find_by_name(trip);     // find_if  
                 break; 
-            case 7:  birthday_all(trip);       
+            case 7:  birthday_all(trip);        // for_each
                 break; 
-            case 8:  remove_color(trip);       
+            case 8:  remove_color(trip);        // remove_if + erase
                 break; 
-            case 9:  reverse_trip(trip);       
+            case 9:  reverse_trip(trip);       // reverse
                 break;
-            case 10: names_transform(trip);    
+            case 10: names_transform(trip);    // transform
                 break; 
-            case 11: dedupe_names(trip);       
+            case 11: dedupe_names(trip);       // unique (after sort)
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -163,6 +163,14 @@ int select_goat(list<Goat> trp) {
     return input;
 }
 
+// --------------------- STL Algorithm Demonstrations -----------------
+
+
+
+    //avg_age — accumulate
+    //Sums all ages and prints the average age of goats in the list.
+
+
 void avg_age(list<Goat>& trip) {
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
     int total = accumulate(trip.begin(), trip.end(), 0,[](int acc, const Goat& g){ 
@@ -170,6 +178,11 @@ void avg_age(list<Goat>& trip) {
     cout << fixed << setprecision(2)
          << "Average age: " << (double)total / trip.size() << "\n";
 }
+
+
+    //any_old_enough — any_of
+    //Asks for N and checks if any goat has age >= N
+
 
 void any_old_enough(list<Goat>& trip) {
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
@@ -181,7 +194,10 @@ void any_old_enough(list<Goat>& trip) {
     cout << (ok ? "Yes" : "No") << ", at least one goat is >= " << n << ".\n";
 }
 
-void find_by_name(list<Goat>& trip){
+    //find_by_name — find_if
+    //Reads a target name and prints the first matching goat (if any)
+
+    void find_by_name(list<Goat>& trip){
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
     string want; 
     cout << "Name to find: "; cin >> want;
@@ -197,12 +213,18 @@ void find_by_name(list<Goat>& trip){
     }
 }
 
+    //birthday_all — for_each
+    //Increment age by 1 (birthday).
+
 void birthday_all(list<Goat>& trip){
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
     for_each(trip.begin(), trip.end(),
         [](Goat& g){ g.set_age(g.get_age() + 1); });
     cout << "Every goat just had a birthday! (+1 age)\n";
 }
+
+    //remove_color — remove + erase
+    //Removes all goats that match a user-input color.
 
 void remove_color(list<Goat>& trip){
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
@@ -216,11 +238,18 @@ void remove_color(list<Goat>& trip){
          << " goat(s). New size: " << trip.size() << "\n";
 }
 
+    //reverse_trip — reverse
+    //Reverses the order of the list in-place.
+
 void reverse_trip(list<Goat>& trip){
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
     reverse(trip.begin(), trip.end());
     cout << "Trip order reversed.\n";
 }
+
+    //names_transform — transform
+    //Copies just the names into a vector<string> and prints them.
+    //Demonstrates mapping from one sequence to another.
 
 void names_transform(list<Goat>& trip) {
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
@@ -230,6 +259,8 @@ void names_transform(list<Goat>& trip) {
     for (size_t i = 0; i < names.size(); i++)
         cout << "\t[" << (i+1) << "] " << names[i] << "\n";
 }
+    //dedupe_names — unique
+    //unique removes duplicates
 
 void dedupe_names(list<Goat>& trip){
     if (trip.empty()) { cout << "Trip is empty.\n"; return; }
